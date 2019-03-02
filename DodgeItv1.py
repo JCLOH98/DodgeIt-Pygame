@@ -43,7 +43,7 @@ fallingnum = 6
 pygame.init()
 Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
-pygame.display.set_caption("Dodge It")
+pygame.display.set_caption("Dodge It.v1")
 Font = pygame.font.Font('freesansbold.ttf',32)
 
 def InitialRect():
@@ -75,18 +75,18 @@ def DrawFallingItems():
                 Rect[draw].y = Rect[draw].y + yspeed
 
 def StartScreen():
-        Display.fill(BLACK)
-        Title = Font.render("Dodge it",True,WHITE)
+        Display.fill(GREY)
+        Title = Font.render("Dodge it.v1",True,BLUE)
         TitleRect = Title.get_rect()
         TitleRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2 - TitleRect.height)
         Display.blit(Title,TitleRect)
 
-        Coder = Font.render("by JCLOH",True,WHITE)
+        Coder = Font.render("by JCLOH",True,BLUE)
         CoderRect = Coder.get_rect()
         CoderRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2))
         Display.blit(Coder,CoderRect)
 
-        StartButton = Font.render("Start",True,WHITE)
+        StartButton = Font.render("Start",True,RED)
         StartRect = StartButton.get_rect()
         StartRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + CoderRect.height + StartRect.height)
         Display.blit(StartButton,StartRect)
@@ -210,8 +210,8 @@ def main():
                 #collision check
                 for collision in range(fallingnum):
                         if (userRect.colliderect(Rect[collision]) == True):
-                                Display.fill(BLACK)
-                                gameover = Font.render("GAME OVER!!!",True,WHITE)
+                                Display.fill(GREY)
+                                gameover = Font.render("GAME OVER!!!",True,BLUE)
                                 gameoverRect = gameover.get_rect()
                                 gameoverRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                                 Display.blit(gameover,gameoverRect)
