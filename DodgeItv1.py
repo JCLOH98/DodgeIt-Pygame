@@ -44,7 +44,7 @@ pygame.init()
 Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 pygame.display.set_caption("Dodge It.v1")
-Font = pygame.font.Font('freesansbold.ttf',32)
+Font = pygame.font.Font('victorycomics.ttf',32)
 
 def InitialRect():
         #fallingitems initial position
@@ -70,23 +70,23 @@ def InitialRect():
 def DrawFallingItems():
         #draw falling items
             for draw in range(fallingnum):
-                pygame.draw.rect(Display,BLUE,Rect[draw])
+                pygame.draw.rect(Display,WHITE,Rect[draw])
                 yspeed = 5
                 Rect[draw].y = Rect[draw].y + yspeed
 
 def StartScreen():
-        Display.fill(GREY)
-        Title = Font.render("Dodge it.v1",True,BLUE)
+        Display.fill(BLACK)
+        Title = Font.render("Dodge it.v1",True,WHITE)
         TitleRect = Title.get_rect()
         TitleRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2 - TitleRect.height)
         Display.blit(Title,TitleRect)
 
-        Coder = Font.render("by JCLOH",True,BLUE)
+        Coder = Font.render("by JCLOH",True,GREY)
         CoderRect = Coder.get_rect()
         CoderRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2))
         Display.blit(Coder,CoderRect)
 
-        StartButton = Font.render("Start",True,RED)
+        StartButton = Font.render("Start",True,WHITE)
         StartRect = StartButton.get_rect()
         StartRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + CoderRect.height + StartRect.height)
         Display.blit(StartButton,StartRect)
@@ -140,18 +140,34 @@ def main():
 
         #THE START SCREEN LOOP
         StartScreen()
-                
+
+        TheTime = 0 #time counter
+        Start = time.time() #current time
+        
+        
         #THE GAME LOOP
         while running:
 
                 #background color
-                Display.fill(GREY)
+                Display.fill(BLACK)
 
-                #colorman square
-                pygame.draw.rect(Display,RED,userRect)
+                End = time.time()#end time
+
+                if (int(End) - int(Start) == 1):
+                        TheTime = TheTime + 1
+                        Start = time.time()
+                        
+                #player square
+                pygame.draw.rect(Display,GREY,userRect)
 
                 #draw falling items
                 DrawFallingItems()
+
+                #show time
+                TimesWidth = Font.render("Time(s):",True,GREY).get_rect().width
+                Display.blit(Font.render("Time(s):",True,GREY),(SCREEN_WIDTH - TimesWidth*2,10))
+                Timer = Font.render(str(TheTime),True,GREY)
+                Display.blit(Timer, ((SCREEN_WIDTH - TimesWidth) + 1,10))
 
                 #check if the items fall out of the screen
                 #use 1 rect to check if it fall out the screen as all falling items has same speed
@@ -210,8 +226,8 @@ def main():
                 #collision check
                 for collision in range(fallingnum):
                         if (userRect.colliderect(Rect[collision]) == True):
-                                Display.fill(GREY)
-                                gameover = Font.render("GAME OVER!!!",True,BLUE)
+                                Display.fill(BLACK)
+                                gameover = Font.render("GAME OVER!!!",True,WHITE)
                                 gameoverRect = gameover.get_rect()
                                 gameoverRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                                 Display.blit(gameover,gameoverRect)

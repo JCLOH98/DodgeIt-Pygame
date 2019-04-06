@@ -55,7 +55,7 @@ for rect in range(5):
 while True:
 
     #background color
-    Display.fill(GREY)
+    Display.fill(BLACK)
     
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -67,7 +67,7 @@ while True:
     RandomNum = RandomNum2 = []
     
     for draw in range(5):
-        pygame.draw.rect(Display,BLUE,Rect[draw])
+        pygame.draw.rect(Display,WHITE,Rect[draw])
         yspeed = 5
         Rect[draw].y = Rect[draw].y + yspeed
 
