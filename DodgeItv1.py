@@ -44,7 +44,7 @@ pygame.init()
 Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 pygame.display.set_caption("Dodge It.v1")
-Font = pygame.font.Font('Fonts\victorycomics.ttf',32)
+Font = pygame.font.Font('Fonts/victorycomics.ttf',32)
 
 def InitialRect():
         #fallingitems initial position
