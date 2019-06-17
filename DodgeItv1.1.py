@@ -43,7 +43,7 @@ fallingnum = 6
 pygame.init()
 Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
-pygame.display.set_caption("Dodge It.v1")
+pygame.display.set_caption("Dodge It.v1.1")
 Font = pygame.font.Font('Fonts/victorycomics.ttf',32)
 
 def InitialRect():
@@ -76,20 +76,25 @@ def DrawFallingItems():
 
 def StartScreen():
         Display.fill(BLACK)
-        Title = Font.render("Dodge it.v1",True,WHITE)
+        Title = Font.render("Dodge it_v1.1",True,WHITE)
         TitleRect = Title.get_rect()
-        TitleRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2 - TitleRect.height)
+        TitleRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/4)
         Display.blit(Title,TitleRect)
 
         Coder = Font.render("by JCLOH",True,GREY)
         CoderRect = Coder.get_rect()
-        CoderRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2))
+        CoderRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/4) + CoderRect.height)
         Display.blit(Coder,CoderRect)
 
         StartButton = Font.render("Start",True,WHITE)
         StartRect = StartButton.get_rect()
-        StartRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + CoderRect.height + StartRect.height)
+        StartRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
         Display.blit(StartButton,StartRect)
+
+        Record = Font.render("Previous Record",True,WHITE)
+        RecordRect = Record.get_rect()
+        RecordRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height)
+        Display.blit(Record,RecordRect)
 
         Start = True
 
@@ -119,12 +124,42 @@ def StartScreen():
                                                 #Start = False
                                                 
                         elif event.type == MOUSEBUTTONUP:
+                                
                                 if (PreviousClick == LEFT_CLICK):
+                                        #Pressed Start
                                         if(pygame.mouse.get_pos()[0] > StartRect.x and\
                                            pygame.mouse.get_pos()[0] < StartRect.x + StartRect.width and\
                                            pygame.mouse.get_pos()[1] > StartRect.y and\
                                            pygame.mouse.get_pos()[1] < StartRect.y + StartRect.height):
                                                 Start = False
+
+                                        #Pressed Previous Record   
+                                        elif(pygame.mouse.get_pos()[0] > RecordRect.x and\
+                                             pygame.mouse.get_pos()[0] < RecordRect.x + RecordRect.width and\
+                                             pygame.mouse.get_pos()[1] > RecordRect.y and\
+                                             pygame.mouse.get_pos()[1] < RecordRect.y + RecordRect.height):
+
+                                                Display.fill(BLACK)
+
+                                                TimeName = Font.render("Time(s)",True,WHITE)
+                                                TimeNameRect = TimeName.get_rect()
+                                                TimeNameRect.center = ((SCREEN_WIDTH/2),(TimeNameRect.height)*2)
+                                                Display.blit(TimeName,TimeNameRect)
+
+                                                LevelName = Font.render("Level(s)",True,WHITE)
+                                                LevelNameRect = LevelName.get_rect()
+                                                #LevelNameRect.center = ((SCREEN_WIDTH/2) + (TimeNameRect.width)*2,(LevelNameRect.height)*2)
+                                                Display.blit(LevelName,((SCREEN_WIDTH/2) + TimeNameRect.width,(TimeNameRect.height)*1.5))
+
+                                                PlayerName = Font.render("Player Name",True,WHITE)
+                                                PlayerNameRect = PlayerName.get_rect()
+                                                #PlayerNameRect.center = ((SCREEN_WIDTH/2) - (TimeNameRect.width)*2,(PlayerNameRect.height)*2)
+                                                Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
+
+                                                
+                                                pygame.display.update()
+                                                pygame.time.Clock().tick(30) #30fps
+                                                print("here")
                                 
         
 def main():
