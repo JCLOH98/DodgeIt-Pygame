@@ -110,6 +110,7 @@ def StartScreen():
                                 sys.exit()
 
                         elif event.type == KEYDOWN:
+                                #Press Enter to start
                                 if (event.key == K_RETURN):
                                                 Start = False
 
@@ -156,9 +157,7 @@ def StartScreen():
                                                 #PlayerNameRect.center = ((SCREEN_WIDTH/2) - (TimeNameRect.width)*2,(PlayerNameRect.height)*2)
                                                 Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
 
-                                                
                                                 pygame.display.update()
-                                                pygame.time.Clock().tick(30) #30fps
                                                 print("here")
                                 
         
