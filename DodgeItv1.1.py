@@ -74,7 +74,28 @@ def DrawFallingItems():
                 yspeed = 5
                 Rect[draw].y = Rect[draw].y + yspeed
 
+def RecordScreen():
+        Display.fill(BLACK)
+
+        TimeName = Font.render("Time(s)",True,WHITE)
+        TimeNameRect = TimeName.get_rect()
+        TimeNameRect.center = ((SCREEN_WIDTH/2),(TimeNameRect.height)*2)
+        Display.blit(TimeName,TimeNameRect)
+
+        LevelName = Font.render("Level(s)",True,WHITE)
+        LevelNameRect = LevelName.get_rect()
+        #LevelNameRect.center = ((SCREEN_WIDTH/2) + (TimeNameRect.width)*2,(LevelNameRect.height)*2)
+        Display.blit(LevelName,((SCREEN_WIDTH/2) + TimeNameRect.width,(TimeNameRect.height)*1.5))
+
+        PlayerName = Font.render("Player Name",True,WHITE)
+        PlayerNameRect = PlayerName.get_rect()
+        #PlayerNameRect.center = ((SCREEN_WIDTH/2) - (TimeNameRect.width)*2,(PlayerNameRect.height)*2)
+        Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
+
+        pygame.display.update()
+        
 def StartScreen():
+        
         Display.fill(BLACK)
         Title = Font.render("Dodge it_v1.1",True,WHITE)
         TitleRect = Title.get_rect()
@@ -86,7 +107,7 @@ def StartScreen():
         CoderRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/4) + CoderRect.height)
         Display.blit(Coder,CoderRect)
 
-        StartButton = Font.render("Start",True,WHITE)
+        StartButton = Font.render("-> Start",True,GREY)
         StartRect = StartButton.get_rect()
         StartRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
         Display.blit(StartButton,StartRect)
@@ -96,6 +117,13 @@ def StartScreen():
         RecordRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height)
         Display.blit(Record,RecordRect)
 
+        Exit = Font.render("Exit",True,WHITE)
+        ExitRect = Exit.get_rect()
+        ExitRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height + ExitRect.height)
+        Display.blit(Exit,ExitRect)
+
+        Condition = 1
+
         Start = True
 
         PreviousClick = (0,0,0)
@@ -104,15 +132,121 @@ def StartScreen():
         pygame.time.Clock().tick(30) #30fps
 
         while Start:
+                print(Condition)
+                if (Condition == 0 or Condition < 0):
+                        Condition = 0
+                        Display.fill(BLACK)
+                        
+                elif (Condition == 1):
+                        #cover up the previous one
+                        pygame.draw.rect(Display,BLACK,StartRect)
+                        pygame.draw.rect(Display,BLACK,RecordRect)
+                        pygame.draw.rect(Display,RED,ExitRect)
+
+                        #new one
+                        StartButton = Font.render("-> Start",True,GREY)
+                        StartRect = StartButton.get_rect()
+                        StartRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                        Display.blit(StartButton,StartRect)
+
+                        Record = Font.render("Previous Record",True,WHITE)
+                        RecordRect = Record.get_rect()
+                        RecordRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height)
+                        Display.blit(Record,RecordRect)
+
+                        Exit = Font.render("Exit",True,WHITE)
+                        ExitRect = Exit.get_rect()
+                        ExitRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height + ExitRect.height)
+                        Display.blit(Exit,ExitRect)
+                                        
+                        pygame.display.update()
+
+                elif (Condition == 2):
+                        #cover up the previous one
+                        pygame.draw.rect(Display,BLACK,StartRect)
+                        pygame.draw.rect(Display,BLACK,RecordRect)
+                        pygame.draw.rect(Display,GREEN,ExitRect)
+
+                        #new one
+                        StartButton = Font.render("Start",True,WHITE)
+                        StartRect = StartButton.get_rect()
+                        StartRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                        Display.blit(StartButton,StartRect)
+
+                        Record = Font.render("-> Previous Record",True,GREY)
+                        RecordRect = Record.get_rect()
+                        RecordRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height)
+                        Display.blit(Record,RecordRect)
+
+                        Exit = Font.render("Exit",True,WHITE)
+                        ExitRect = Exit.get_rect()
+                        ExitRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height + ExitRect.height)
+                        Display.blit(Exit,ExitRect)
+                                        
+                        pygame.display.update()
+
+                elif (Condition == 3):
+                        #cover up the previous one
+                        pygame.draw.rect(Display,BLACK,StartRect)
+                        pygame.draw.rect(Display,BLACK,RecordRect)
+                        pygame.draw.rect(Display,BLUE,ExitRect)
+
+                        #new one
+                        StartButton = Font.render("Start",True,WHITE)
+                        StartRect = StartButton.get_rect()
+                        StartRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                        Display.blit(StartButton,StartRect)
+
+                        Record = Font.render("Previous Record",True,WHITE)
+                        RecordRect = Record.get_rect()
+                        RecordRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height)
+                        Display.blit(Record,RecordRect)
+
+                        Exit = Font.render("-> Exit",True,GREY)
+                        ExitRect = Exit.get_rect()
+                        ExitRect.center = (SCREEN_WIDTH/2,(SCREEN_HEIGHT/2) + RecordRect.height + ExitRect.height)
+                        Display.blit(Exit,ExitRect)
+                                        
+                        pygame.display.update()
+                                        
                 for event in pygame.event.get():
                         if event.type == QUIT:
                                 pygame.quit()
                                 sys.exit()
 
                         elif event.type == KEYDOWN:
-                                #Press Enter to start
+                                #Pressed Enter 
                                 if (event.key == K_RETURN):
+                                        if (Condition == 1):
                                                 Start = False
+
+                                        elif (Condition == 2):
+                                                Condition = 0
+                                                RecordScreen()
+                                                #----------------------------------
+                                                #----------------------------------
+                                                #----------------------------------
+                                                #THE PROBLEM IS HERE, NEED TO SHOW THE LIST
+                                                #MAYBE CAN PUT THE READ FILE IN RECORDSCREEN()
+                                                #----------------------------------
+                                                #----------------------------------
+                                                #----------------------------------
+
+                                        elif (Condition == 3):
+                                                pygame.quit()
+                                                sys.exit()
+                                                
+                                                
+                                elif (event.key == K_w or event.key == K_UP):
+                                        if (Condition != 1):
+                                                Condition -=1
+
+                                elif (event.key == K_s or event.key == K_DOWN):
+                                        if (Condition != 3):
+                                                Condition += 1
+                                        
+                                elif (event.key == K_BACKSPACE):
+                                                return StartScreen()
 
                         elif event.type == MOUSEBUTTONDOWN:
                                 #left click
@@ -158,7 +292,6 @@ def StartScreen():
                                                 Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
 
                                                 pygame.display.update()
-                                                print("here")
                                 
         
 def main():
