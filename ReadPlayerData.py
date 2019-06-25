@@ -13,12 +13,12 @@ def main():
 
     NewData = []
     for i in range(SetOfData):
-        print(Datas[i].split(','))
+        #print(Datas[i].split(','))
         #They both different
         #NewData = NewData + (Datas[i].split(','))
         NewData.append((Datas[i].split(',')))
 
-    print(NewData)
+    #print(NewData)
 
     for i in range(SetOfData):
         for j in range(3):
