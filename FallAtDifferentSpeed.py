@@ -19,7 +19,7 @@ INTERVAL = 50
 #items 
 Rect = []
 RandomNums = []
-numfalls = 6
+numfalls = 5
 randx = 0
 RandomSpeed = []
 
@@ -57,28 +57,30 @@ def FallingItems():
 def CheckItems():
     for num in range(numfalls):
         if (Rect[num].y + IMAGE_HEIGHT >= SCREEN_HEIGHT):
-            #print(RandomNums)
+            print(RandomNums,"\n ===")
             RandomNums.remove(Rect[num].x)
             RandomNums.remove(Rect[num].x + INTERVAL)
             RandomNums.remove(Rect[num].x - INTERVAL)
 
-            Rect[num].x = random.randint(0,SCREEN_WIDTH -IMAGE_WIDTH)
+            Rect[num].x = random.randrange(0,SCREEN_WIDTH -IMAGE_WIDTH,IMAGE_WIDTH)
         
             while True:
-                if (Rect[num].x % INTERVAL == 0 and Rect[num].x not in RandomNums):
+                if (Rect[num].x not in RandomNums):
+                    #print(Rect[num].x,"\n***")
                     RandomNums.append(Rect[num].x)
                     RandomNums.append(Rect[num].x + INTERVAL)
                     RandomNums.append(Rect[num].x - INTERVAL)
                     break;
             
                 else:
-                    Rect[num].x = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
+                    #print(Rect[num],"\n***")
+                    Rect[num].x = random.randrange(0,SCREEN_WIDTH -IMAGE_WIDTH,IMAGE_WIDTH)
                     
             Rect[num].y = 0
 
-            RandomNums.append(randx)
-            RandomNums.append(randx + INTERVAL)
-            RandomNums.append(randx - INTERVAL)
+            #RandomNums.append(Rect[num].x)
+            #RandomNums.append(Rect[num].x + INTERVAL)
+            #RandomNums.append(Rect[num].x - INTERVAL)
 
 def TheSpeed():
     thespeed = 0
@@ -100,7 +102,7 @@ def main():
     #print(RandomSpeed)
 
     #the positions
-    #print(RandomNums)
+    print(RandomNums,"\n")
 
     while True:
 
