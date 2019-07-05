@@ -1,3 +1,4 @@
+import re
 import time
 import random
 import pygame,sys
@@ -70,7 +71,7 @@ def InitialRect():
 
 def Level1():
         #draw falling items
-            for draw in range(fallingnum):
+        for draw in range(fallingnum):
                 pygame.draw.rect(Display,WHITE,Rect[draw])
                 yspeed = 5
                 Rect[draw].y = Rect[draw].y + yspeed
@@ -80,7 +81,13 @@ def Level2():
         yspeed = RandomSpeed[num]
         Rect[num].y = Rect[num].y + yspeed
 
-def Level2ItemsCheck():
+def Level3():
+        for draw in range(fallingnum):
+                pygame.draw.rect(Display,WHITE,Rect[draw])
+                yspeed = 5
+                Rect[draw].y = Rect[draw].y + yspeed + 5
+
+def LevelItemsCheck():
     for num in range(fallingnum):
         if (Rect[num].y + IMAGE_HEIGHT >= SCREEN_HEIGHT):
             RandomNums.remove(Rect[num].x)
@@ -118,7 +125,7 @@ def RecordScreen():
 
         TimeName = Font.render("Time(s)",True,WHITE)
         TimeNameRect = TimeName.get_rect()
-        TimeNameRect.center = ((SCREEN_WIDTH/2),(TimeNameRect.height)*2)
+        TimeNameRect.center = ((SCREEN_WIDTH) - (SCREEN_WIDTH/4) - (SCREEN_WIDTH/10) ,(TimeNameRect.height)*2)
         Display.blit(TimeName,TimeNameRect)
 
         LevelName = Font.render("Level(s)",True,WHITE)
@@ -129,7 +136,7 @@ def RecordScreen():
 
         PlayerName = Font.render("Player Name",True,WHITE)
         PlayerNameRect = PlayerName.get_rect()
-        PlayerNameRect.center = (LevelNameRect.width,(PlayerNameRect.height)*2)
+        PlayerNameRect.center = (TimeNameRect.width*2,(PlayerNameRect.height)*2)
         Display.blit(PlayerName,PlayerNameRect)
         #Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
         
@@ -161,19 +168,19 @@ def RecordScreen():
                         if (j == 0):
                                 TheName = Font.render(NewData[i][j],True,GREY)
                                 TheNameRect = TheName.get_rect()
-                                TheNameRect.center = (LevelNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                 Display.blit(TheName,TheNameRect)
                                 
                         elif (j == 1):
                                 TheTime = Font.render(NewData[i][j],True,GREY)
                                 TheTimeRect = TheTime.get_rect()
-                                TheTimeRect.center = ((SCREEN_WIDTH/2),(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                 Display.blit(TheTime,TheTimeRect)
 
                         elif (j == 2):
                                 TheLevel = Font.render(NewData[i][j],True,GREY)
                                 TheLevelRect = TheLevel.get_rect()
-                                TheLevelRect.center = (SCREEN_WIDTH - TimeNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                 Display.blit(TheLevel,TheLevelRect)
 
         pygame.display.update()
@@ -190,7 +197,7 @@ def RecordScreen():
                         elif (event.type == MOUSEBUTTONDOWN):
                                 #scroll up
                                 if (event.button == 4):
-                                        print("scrolling up")
+                                        #print("scrolling up")
                                         #if NextData = 0, do nothing
                                         if (NextData != 0):
                                             NextData -=1
@@ -209,25 +216,25 @@ def RecordScreen():
                                                         if (j == 0):
                                                                 TheName = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (LevelNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheName,TheNameRect)
                                                                 
                                                         elif (j == 1):
                                                                 TheTime = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = ((SCREEN_WIDTH/2),(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheTime,TheTimeRect)
 
                                                         elif (j == 2):
                                                                 TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (SCREEN_WIDTH - TimeNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheLevel,TheLevelRect)
                                         pygame.display.update()
 
                                 #scrolldown
                                 elif (event.button == 5):
-                                        print("scrolling down")
+                                        #print("scrolling down")
                                         #if NextData = SetOfData - ScreenShowing, which means reach the end of file, then do nothing
                                         if (NextData != (SetOfData - ScreenShowing)):
                                                 NextData += 1
@@ -245,26 +252,26 @@ def RecordScreen():
                                                         if (j == 0):
                                                                 TheName = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (LevelNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheName,TheNameRect)
                                                                 
                                                         elif (j == 1):
                                                                 TheTime = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = ((SCREEN_WIDTH/2),(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheTime,TheTimeRect)
 
                                                         elif (j == 2):
                                                                 TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (SCREEN_WIDTH - TimeNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheLevel,TheLevelRect)
                                         pygame.display.update()
                                 
                                 
                         elif event.type == KEYDOWN:
                                 if (event.key == K_w or event.key == K_UP):
-                                        print("up")
+                                        #print("up")
                                         #if NextData = 0, do nothing
                                         if (NextData != 0):
                                             NextData -=1
@@ -283,24 +290,24 @@ def RecordScreen():
                                                         if (j == 0):
                                                                 TheName = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (LevelNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheName,TheNameRect)
                                                                 
                                                         elif (j == 1):
                                                                 TheTime = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = ((SCREEN_WIDTH/2),(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheTime,TheTimeRect)
 
                                                         elif (j == 2):
                                                                 TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (SCREEN_WIDTH - TimeNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheLevel,TheLevelRect)
                                         pygame.display.update()
 
                                 elif (event.key == K_s or event.key == K_DOWN):
-                                        print("down")
+                                        #print("down")
                                         #if NextData = SetOfData - ScreenShowing, which means reach the end of file, then do nothing
                                         if (NextData != (SetOfData - ScreenShowing)):
                                                 NextData += 1
@@ -318,24 +325,24 @@ def RecordScreen():
                                                         if (j == 0):
                                                                 TheName = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (LevelNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheName,TheNameRect)
                                                                 
                                                         elif (j == 1):
                                                                 TheTime = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = ((SCREEN_WIDTH/2),(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheTime,TheTimeRect)
 
                                                         elif (j == 2):
                                                                 TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
                                                                 TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (SCREEN_WIDTH - TimeNameRect.width,(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                 Display.blit(TheLevel,TheLevelRect)
                                         pygame.display.update()
                                         
                                 elif (event.key == K_BACKSPACE):
-                                        print("backspace is pressed")
+                                        #print("backspace is pressed")
                                         #close file
                                         File.close()
                                         #Clear the screen
@@ -380,11 +387,11 @@ def StartScreen():
                         
                 elif (Condition == 1):
                         #cover up the previous one
-                        pygame.draw.rect(Display,BLUE,TitleRect)
-                        pygame.draw.rect(Display,BLUE,CoderRect)
+                        pygame.draw.rect(Display,BLACK,TitleRect)
+                        pygame.draw.rect(Display,BLACK,CoderRect)
                         pygame.draw.rect(Display,BLACK,StartRect)
                         pygame.draw.rect(Display,BLACK,RecordRect)
-                        pygame.draw.rect(Display,RED,ExitRect)
+                        pygame.draw.rect(Display,BLACK,ExitRect)
 
                         #new one
                         Display.blit(Title,TitleRect)
@@ -412,7 +419,7 @@ def StartScreen():
                         #cover up the previous one
                         pygame.draw.rect(Display,BLACK,StartRect)
                         pygame.draw.rect(Display,BLACK,RecordRect)
-                        pygame.draw.rect(Display,GREEN,ExitRect)
+                        pygame.draw.rect(Display,BLACK,ExitRect)
 
                         #new one
                         StartButton = Font.render("Start",True,WHITE)
@@ -436,7 +443,7 @@ def StartScreen():
                         #cover up the previous one
                         pygame.draw.rect(Display,BLACK,StartRect)
                         pygame.draw.rect(Display,BLACK,RecordRect)
-                        pygame.draw.rect(Display,BLUE,ExitRect)
+                        pygame.draw.rect(Display,BLACK,ExitRect)
 
                         #new one
                         StartButton = Font.render("Start",True,WHITE)
@@ -493,6 +500,12 @@ def StartScreen():
                                 
         
 def main():
+        #use to check the FPS
+        FPS = 0;
+        realtimeFPS = 0
+        FPScal = 0
+        previousFPS = 0
+        
         #Level
         Level = 1
         
@@ -515,6 +528,7 @@ def main():
         
         #THE GAME LOOP
         while running:
+                FPS += 1
 
                 #background color
                 Display.fill(BLACK)
@@ -524,9 +538,32 @@ def main():
                 if (int(End) - int(Start) == 1):
                         TheTime = TheTime + 1
                         Start = time.time()
+                        #To check the FPS
+                        print("Avg FPS: ", FPS/TheTime)
+                        print("RealTimeFPS:", (FPS - previousFPS)/(TheTime - FPScal),"\n")
+                        previousFPS = FPS
+                        FPScal += 1
+                        
                         
                 #player square
-                pygame.draw.rect(Display,GREY,userRect)
+                Robot = pygame.transform.scale(pygame.image.load("./Sprites/DungeonTilesII/big_zombie_idle_anim_f0.png"),(IMAGE_WIDTH*2,IMAGE_HEIGHT*2))#pygame.image.load("./Sprites/robotfree/png/Idle (1).png")
+                RobotRect = Robot.get_rect()
+                RobotRect.center = userRect.center
+                Display.blit(Robot,(RobotRect.x,RobotRect.y))
+                pygame.draw.rect(Display,GREY,userRect,3)
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #WORK ON THE PLAYER SPRITES HERE
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
+                #-------------------------------------------
 
                 #show time
                 TimesWidth = Font.render("Time(s):",True,GREY).get_rect().width
@@ -534,9 +571,12 @@ def main():
                 Timer = Font.render(str(TheTime),True,GREY)
                 Display.blit(Timer, ((SCREEN_WIDTH - TimesWidth) + 1,10))
 
-                #when time is 5 seconds, goes to level 2
+                #when time is 10 seconds, goes to level 2
                 if(TheTime == 10):
                         Level = 2
+                elif(TheTime == 20):
+                        Level = 3
+                        
                         
                 #Level1
                 if (Level == 1):
@@ -545,41 +585,23 @@ def main():
                         Level1WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level1Word,Level1WordRect)
                         Level1()
+                        LevelItemsCheck()
                         
-                        #check if the items fall out of the screen
-                        #use 1 rect to check if it fall out the screen as all falling items has same speed
-                        if (Rect[0].y > usery):
-                                for check in range(fallingnum):
-                                        #remove the previous coordinates
-                                        RandomNums.remove(Rect[check].x)
-                                        RandomNums.remove(Rect[check].x + INTERVAL)
-                                        RandomNums.remove(Rect[check].x - INTERVAL)
-                                        
-                                        randomx = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
-                                        while True:
-                                                if (randomx % INTERVAL == 0 and randomx not in RandomNums):
-                                                        #previous position
-                                                        RandomNums.append(randomx)
-                                                        #positions beside previous position
-                                                        RandomNums.append(randomx + IMAGE_WIDTH)
-                                                        RandomNums.append(randomx - IMAGE_WIDTH)
-
-                                                        #Set the new x for the items
-                                                        Rect[check].x = randomx
-
-                                                        break;
-
-                                                else:
-                                                        randomx = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
-
-                                        Rect[check].y = 0
                 elif (Level == 2):
                         Level2Word = Font.render("Level 2",True,WHITE)
                         Level2WordRect = Level2Word.get_rect()
                         Level2WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level2Word,Level2WordRect)
                         Level2()
-                        Level2ItemsCheck()
+                        LevelItemsCheck()
+                        
+                elif (Level == 3):
+                        Level3Word = Font.render("Level 3",True,WHITE)
+                        Level3WordRect = Level3Word.get_rect()
+                        Level3WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                        Display.blit(Level3Word,Level3WordRect)
+                        Level3()
+                        LevelItemsCheck()
                         
                 for event in pygame.event.get():
                         if event.type == QUIT:
@@ -623,11 +645,89 @@ def main():
                 pygame.display.update()
                 pygame.time.Clock().tick(30) #30fps
 
-        #wait 3 seconds
-        time.sleep(3)
-        #quit game
-        pygame.quit()
-        sys.exit()
+        #wait 0 seconds
+        time.sleep(0)
+        #
+        #
+        #
+        #
+        #o for debugging
+        #
+        #
+        #
+        #
+        #
+        #
+        
+        #Game ending
+        Ending = True
+        RecordName = []
+        MaxChar = 0
+        
+        #Clear the game over screen
+        Display.fill(BLACK)
+
+        #Please Enter your name
+        EnterName = Font.render("Please Enter your name (Max 20 characters)",True,WHITE)
+        EnterNameRect = EnterName.get_rect()
+        EnterNameRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2 - EnterNameRect.height)
+        Display.blit(EnterName,EnterNameRect)
+
+        while Ending:
+                for event in pygame.event.get():
+                        if event.type == QUIT:
+                                pygame.quit()
+                                sys.exit()
+
+                        elif event.type == pygame.KEYDOWN:
+                                #print("Entering name")
+                                if event.key == K_BACKSPACE:
+                                        #print("backspace")
+                                        #print(RecordName)
+                                        
+                                        if (RecordName == [] and MaxChar != 0):
+                                                pygame.draw.rect(Display,BLACK,TheNameRect)
+                                                
+                                        if (RecordName != []):
+                                                MaxChar -= 1
+                                                #remove the last element of the name
+                                                del(RecordName[-1])
+                                                #print(RecordName)
+                                                Name = "".join(RecordName)
+                                                print(Name)
+                                                pygame.draw.rect(Display,BLACK,TheNameRect)
+                                                TheName = Font.render(Name,True,GREY)
+                                                TheNameRect = TheName.get_rect()
+                                                TheNameRect.center = (EnterNameRect.center[0], EnterNameRect.center[1] + TheNameRect.height)
+                                                Display.blit(TheName,TheNameRect)
+                                                
+                                        
+                                elif event.key == K_RETURN:
+                                        print("enter")
+                                        
+                                elif re.search("[a-z]",chr(event.key)) or (chr(event.key) in ['1','2','3','4','5','6','7','8','9','0']) or event.key == K_SPACE:
+                                        MaxChar += 1
+
+                                        if MaxChar <= 20:
+                                                RecordName.append(chr(event.key))
+                                                #print("RecordName")
+                                                Name = "".join(RecordName)
+                                                print(Name)
+                                                TheName = Font.render(Name,True,GREY)
+                                                TheNameRect = TheName.get_rect()
+                                                TheNameRect.center = (EnterNameRect.center[0], EnterNameRect.center[1] + TheNameRect.height)
+                                                pygame.draw.rect(Display,BLACK,TheNameRect)
+                                                Display.blit(TheName,TheNameRect)
+                                        else:
+                                                MaxChar = 20
+                                        
+                                        
+                                
+                                #print("MaxChar: ",MaxChar)
+                                                
+                pygame.display.update()
+                pygame.time.Clock().tick(30) #30fps
+                
     
 main()
 
