@@ -4,8 +4,8 @@ import random
 import pygame,sys
 from pygame.locals import*
 
-SCREEN_WIDTH = 960
-SCREEN_HEIGHT = 540
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 550
 IMAGE_WIDTH = 50
 IMAGE_HEIGHT = 50
 
@@ -49,6 +49,58 @@ Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 pygame.display.set_caption("Dodge It.v1.1")
 Font = pygame.font.Font('Fonts/victorycomics.ttf',32)
 
+#images
+#background
+background = pygame.image.load("./Sprites/Background.png").convert()
+backgroundRect = background.get_rect()
+backgroundRect.center = (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+
+#sprites scale factor
+#big zombie = (IMAGE_WIDTH*2,IMAGE_HEIGHT*2)
+#masked orc = (IMAGE_WIDTH,IMAGE_HEIGHT+10)
+scale = (IMAGE_WIDTH*2,IMAGE_HEIGHT*2)
+#idle
+#big zombie
+idle1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f0.png").convert_alpha()
+idle2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f1.png").convert_alpha()
+idle3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f2.png").convert_alpha()
+idle4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f3.png").convert_alpha()
+#masked ogre
+#idle1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f0.png").convert_alpha()
+#idle2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f1.png").convert_alpha()
+#idle3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f2.png").convert_alpha()
+#idle4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f3.png").convert_alpha()
+
+#runleft
+#big zombie
+runleft1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f0.png").convert_alpha()
+runleft2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f1.png").convert_alpha()
+runleft3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f2.png").convert_alpha()
+runleft4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f3.png").convert_alpha()
+#masked ogre
+#runleft1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f0.png").convert_alpha()
+#runleft2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f1.png").convert_alpha()
+#runleft3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f2.png").convert_alpha()
+#runleft4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f3.png").convert_alpha()
+
+
+#runright
+#big zombie
+runright1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f0.png").convert_alpha()
+runright2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f1.png").convert_alpha()
+runright3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f2.png").convert_alpha()
+runright4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f3.png").convert_alpha()
+#masked ogre
+#runright1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f0.png").convert_alpha()
+#runright2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f1.png").convert_alpha()
+#runright3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f2.png").convert_alpha()
+#runright4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f3.png").convert_alpha()
+
+
+def Background():
+        #Display.fill(BLACK)
+        Display.blit(background,backgroundRect)
+
 def InitialRect():
         #fallingitems initial position
         for rect in range(fallingnum):
@@ -89,7 +141,7 @@ def Level3():
 
 def LevelItemsCheck():
     for num in range(fallingnum):
-        if (Rect[num].y + IMAGE_HEIGHT >= SCREEN_HEIGHT):
+        if (Rect[num].y + IMAGE_HEIGHT >= SCREEN_HEIGHT - IMAGE_HEIGHT/2):
             RandomNums.remove(Rect[num].x)
             RandomNums.remove(Rect[num].x + INTERVAL)
             RandomNums.remove(Rect[num].x - INTERVAL)
@@ -497,8 +549,9 @@ def StartScreen():
                                         
                                 elif (event.key == K_BACKSPACE):
                                                 return StartScreen()
-                                
         
+                
+
 def main():
         #use to check the FPS
         FPS = 0;
@@ -525,13 +578,16 @@ def main():
         Start = time.time() #current time
 
         TheSpeed()
+
         
         #THE GAME LOOP
         while running:
                 FPS += 1
 
                 #background color
-                Display.fill(BLACK)
+                #Display.fill(BLACK)
+                Background()
+                        
 
                 End = time.time()#end time
 
@@ -546,10 +602,10 @@ def main():
                         
                         
                 #player square
-                Robot = pygame.transform.scale(pygame.image.load("./Sprites/DungeonTilesII/big_zombie_idle_anim_f0.png"),(IMAGE_WIDTH*2,IMAGE_HEIGHT*2))#pygame.image.load("./Sprites/robotfree/png/Idle (1).png")
-                RobotRect = Robot.get_rect()
-                RobotRect.center = userRect.center
-                Display.blit(Robot,(RobotRect.x,RobotRect.y))
+                #Robot = pygame.transform.scale(pygame.image.load("./Sprites/DungeonTilesII/big_zombie_idle_anim_f0.png"),(IMAGE_WIDTH*2,IMAGE_HEIGHT*2))#pygame.image.load("./Sprites/robotfree/png/Idle (1).png")
+                #RobotRect = Robot.get_rect()
+                #RobotRect.center = userRect.center
+                #Display.blit(Robot,(RobotRect.x,RobotRect.y))
                 pygame.draw.rect(Display,GREY,userRect,3)
                 #-------------------------------------------
                 #-------------------------------------------
@@ -567,9 +623,9 @@ def main():
 
                 #show time
                 TimesWidth = Font.render("Time(s):",True,GREY).get_rect().width
-                Display.blit(Font.render("Time(s):",True,GREY),(SCREEN_WIDTH - TimesWidth*2,10))
+                Display.blit(Font.render("Time(s):",True,GREY),(SCREEN_WIDTH - TimesWidth*2,5))
                 Timer = Font.render(str(TheTime),True,GREY)
-                Display.blit(Timer, ((SCREEN_WIDTH - TimesWidth) + 1,10))
+                Display.blit(Timer, ((SCREEN_WIDTH - TimesWidth) + 1,5))
 
                 #when time is 10 seconds, goes to level 2
                 if(TheTime == 10):
@@ -620,10 +676,96 @@ def main():
                                         right = True
                                         left = False
 
-                if (left == True and right == False):
-                        userRect.x = userRect.x - userspeed
+                if (left == False and right == False):
+                        if ( (FPS - previousFPS) <= 3 or ( (FPS - previousFPS) > 12 and (FPS - previousFPS) <= 15)):
+                                Robot = pygame.transform.scale(idle1,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
 
-                elif (right == True and left == False):
+                        elif ( (FPS - previousFPS) <= 6 or ( (FPS - previousFPS) > 15 and (FPS - previousFPS) <= 18)):
+                                Robot = pygame.transform.scale(idle2,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 9 or ( (FPS - previousFPS) > 18 and (FPS - previousFPS) <= 21)):
+                                Robot = pygame.transform.scale(idle3,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 12 or (FPS - previousFPS) > 21):
+                                Robot = pygame.transform.scale(idle4,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                elif (left == True and right == False):
+                        if ( (FPS - previousFPS) <= 3 or ( (FPS - previousFPS) > 12 and (FPS - previousFPS) <= 15)):
+                                Robot = pygame.transform.scale(runleft1,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 6 or ( (FPS - previousFPS) > 15 and (FPS - previousFPS) <= 18)):
+                                Robot = pygame.transform.scale(runleft2,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 9 or ( (FPS - previousFPS) > 18 and (FPS - previousFPS) <= 21)):
+                                Robot = pygame.transform.scale(runleft3,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 12 or (FPS - previousFPS) > 21):
+                                Robot = pygame.transform.scale(runleft4,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        userRect.x = userRect.x - userspeed
+                                
+
+                elif (right == True and left == False):                        
+                        if ( (FPS - previousFPS) <= 3 or ( (FPS - previousFPS) > 12 and (FPS - previousFPS) <= 15)):
+                                Robot = pygame.transform.scale(runright1,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 6 or ( (FPS - previousFPS) > 15 and (FPS - previousFPS) <= 18)):
+                                Robot = pygame.transform.scale(runright2,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 9 or ( (FPS - previousFPS) > 18 and (FPS - previousFPS) <= 21)):
+                                Robot = pygame.transform.scale(runright3,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+
+                        elif ( (FPS - previousFPS) <= 12 or (FPS - previousFPS) > 21):
+                                Robot = pygame.transform.scale(runright4,scale)
+                                RobotRect = Robot.get_rect()
+                                RobotRect.center = userRect.center
+                                Display.blit(Robot,RobotRect)
+                                #pygame.draw.rect(Display,GREY,userRect,3)
+                        
                         userRect.x = userRect.x + userspeed
 
                 if (userRect.x < 0):
