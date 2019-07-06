@@ -4,7 +4,7 @@ import random
 import pygame,sys
 from pygame.locals import*
 
-SCREEN_WIDTH = 960
+SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 550
 IMAGE_WIDTH = 50
 IMAGE_HEIGHT = 50
@@ -22,32 +22,14 @@ usery = SCREEN_HEIGHT-IMAGE_HEIGHT*2
 LEFT_CLICK = (1,0,0)
 RIGHT_CLICK = (0,0,1)
 
-#user rectangle
-userRect = pygame.Rect(userx,usery,IMAGE_WIDTH,IMAGE_HEIGHT)
-userspeed = 9
-
 INTERVAL = 50
-
-#initial xposition
-randomx = 0
-
-#random y speed
-yspeed = 0
-
-Rect = []
-RandomNums = []
-
-#number of falling items
-fallingnum = 6
-
-#Level 2's random speed
-RandomSpeed = []
 
 pygame.init()
 Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 pygame.display.set_caption("Dodge It.v1.1")
 Font = pygame.font.Font('Fonts/victorycomics.ttf',32)
+FontSmall = pygame.font.Font('Fonts/victorycomics.ttf',15) 
 
 #images
 #background
@@ -108,7 +90,7 @@ def Background():
         #Display.fill(BLACK)
         Display.blit(background,backgroundRect)
 
-def InitialRect():
+def InitialRect(fallingnum,RandomNums,Rect,randomx):
         #fallingitems initial position
         for rect in range(fallingnum):
                 randomx = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
@@ -127,8 +109,9 @@ def InitialRect():
                         randomx = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
 
                 Rect.append(pygame.Rect(randomx,0,IMAGE_WIDTH,IMAGE_HEIGHT))
+                #print(Rect)
 
-def Level1(frame):
+def Level1(frame,fallingnum,Rect):
         #draw falling items
         for draw in range(fallingnum):
                 pygame.draw.rect(Display,WHITE,Rect[draw],3)
@@ -154,7 +137,7 @@ def Level1(frame):
                         chestRect = chest.get_rect()
                         chestRect.center = Rect[draw].center
                         Display.blit(chest,chestRect)
-def Level2(frame):
+def Level2(frame,fallingnum,Rect,RandomSpeed):
         for num in range(fallingnum):
                 pygame.draw.rect(Display,WHITE,Rect[num],3)
                 yspeed = RandomSpeed[num]
@@ -181,7 +164,7 @@ def Level2(frame):
                         chestRect.center = Rect[num].center
                         Display.blit(chest,chestRect)
 
-def Level3(frame):
+def Level3(frame,fallingnum,Rect):
         for draw in range(fallingnum):
                 pygame.draw.rect(Display,WHITE,Rect[draw],3)
                 yspeed = 5
@@ -207,7 +190,60 @@ def Level3(frame):
                         chestRect.center = Rect[draw].center
                         Display.blit(chest,chestRect)
 
-def LevelItemsCheck():
+def Level4(frame,fallingnum,Rect,RandomSpeed):
+        for num in range(fallingnum):
+                pygame.draw.rect(Display,WHITE,Rect[num],3)
+                yspeed = RandomSpeed[num]
+                Rect[num].y = Rect[num].y + yspeed + 5
+        
+                if (frame <= 3 or (frame > 12 and frame <= 15)):
+                        chest = pygame.transform.scale(chest1,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 6 or (frame > 15 and frame <= 18)):
+                        chest = pygame.transform.scale(chest2,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 9 or (frame > 18 and frame <= 21)):
+                        chest = pygame.transform.scale(chest3,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 12 or frame > 21):
+                        chest = pygame.transform.scale(chest4,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+
+def Level5(frame,fallingnum,Rect):
+        for draw in range(fallingnum):
+                pygame.draw.rect(Display,WHITE,Rect[draw],3)
+                yspeed = 5
+                Rect[draw].y = Rect[draw].y + yspeed + 5
+                if (frame <= 3 or (frame > 12 and frame <= 15)):
+                        chest = pygame.transform.scale(chest1,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 6 or (frame > 15 and frame <= 18)):
+                        chest = pygame.transform.scale(chest2,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 9 or (frame > 18 and frame <= 21)):
+                        chest = pygame.transform.scale(chest3,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 12 or frame > 21):
+                        chest = pygame.transform.scale(chest4,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+
+def LevelItemsCheck(fallingnum,Rect,RandomNums):
     for num in range(fallingnum):
         if (Rect[num].y + IMAGE_HEIGHT >= SCREEN_HEIGHT - IMAGE_HEIGHT/2):
             RandomNums.remove(Rect[num].x)
@@ -224,14 +260,14 @@ def LevelItemsCheck():
                     break;
             
                 else:
-                    Rect[num].x = random.randrange(0,SCREEN_WIDTH -IMAGE_WIDTH,IMAGE_WIDTH)
+                    Rect[num].x = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
                     
             Rect[num].y = 0
             
-def TheSpeed():
+def TheSpeed(fallingnum,RandomSpeed):
     thespeed = 0
     for num in range(fallingnum):
-        thespeed = random.randint(3,9)
+        thespeed = random.randint(4,9)
 
         while True:
             if (thespeed not in RandomSpeed):
@@ -259,6 +295,12 @@ def RecordScreen():
         PlayerNameRect.center = (TimeNameRect.width*2,(PlayerNameRect.height)*2)
         Display.blit(PlayerName,PlayerNameRect)
         #Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
+
+        
+        Escape = FontSmall.render("Press \'backspace\' to go back to main menu",True,WHITE)
+        EscapeRect = Escape.get_rect()
+        EscapeRect.center = (SCREEN_WIDTH - EscapeRect.width/2 - 20,SCREEN_HEIGHT - EscapeRect.height*2)
+        Display.blit(Escape,EscapeRect)
         
         #Read the data
         try:
@@ -384,6 +426,7 @@ def RecordScreen():
                                                                         TheLevelRect = TheLevel.get_rect()
                                                                         TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                         Display.blit(TheLevel,TheLevelRect)
+                                                Display.blit(Escape,EscapeRect)
                                                 pygame.display.update()
 
                                 #scrolldown
@@ -421,6 +464,8 @@ def RecordScreen():
                                                                         TheLevelRect = TheLevel.get_rect()
                                                                         TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                         Display.blit(TheLevel,TheLevelRect)
+
+                                                Display.blit(Escape,EscapeRect)
                                                 pygame.display.update()
                                 
                                 
@@ -459,6 +504,8 @@ def RecordScreen():
                                                                         TheLevelRect = TheLevel.get_rect()
                                                                         TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                         Display.blit(TheLevel,TheLevelRect)
+
+                                                Display.blit(Escape,EscapeRect)
                                                 pygame.display.update()
 
                                 elif (event.key == K_s or event.key == K_DOWN):
@@ -495,6 +542,8 @@ def RecordScreen():
                                                                         TheLevelRect = TheLevel.get_rect()
                                                                         TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
                                                                         Display.blit(TheLevel,TheLevelRect)
+
+                                                Display.blit(Escape,EscapeRect)
                                                 pygame.display.update()
                                         
                                 elif (event.key == K_BACKSPACE):
@@ -657,6 +706,25 @@ def StartScreen():
                 
 
 def main():
+        #user rectangle
+        userRect = pygame.Rect(userx,usery,IMAGE_WIDTH,IMAGE_HEIGHT)
+        userspeed = 9
+
+        #initial xposition
+        randomx = 0
+
+        #random y speed
+        yspeed = 0
+
+        Rect = []
+        RandomNums = []
+
+        #number of falling items
+        fallingnum = 6
+
+        #Level 2's random speed
+        RandomSpeed = []
+        
         #use to check the FPS
         FPS = 0;
         realtimeFPS = 0
@@ -667,7 +735,7 @@ def main():
         Level = 1
         
         #Initial position of falling items
-        InitialRect()
+        InitialRect(fallingnum,RandomNums,Rect,randomx)
 
         #Game Loop
         running = True
@@ -681,7 +749,14 @@ def main():
         TheTime = 0 #time counter
         Start = time.time() #current time
 
-        TheSpeed()
+        #random falling speed
+        TheSpeed(fallingnum,RandomSpeed)
+
+        #level condition
+        level2condition = 0
+        level3condition = 0
+        level4condition = 0
+        level5condition = 0
 
         
         #THE GAME LOOP
@@ -726,16 +801,33 @@ def main():
                 #-------------------------------------------
 
                 #show time
-                TimesWidth = Font.render("Time(s):",True,GREY).get_rect().width
-                Display.blit(Font.render("Time(s):",True,GREY),(SCREEN_WIDTH - TimesWidth*2,5))
-                Timer = Font.render(str(TheTime),True,GREY)
+                TimesWidth = Font.render("Time(s):",True,WHITE).get_rect().width
+                Display.blit(Font.render("Time(s):",True,WHITE),(SCREEN_WIDTH - TimesWidth*2,5))
+                Timer = Font.render(str(TheTime),True,WHITE)
                 Display.blit(Timer, ((SCREEN_WIDTH - TimesWidth) + 1,5))
-
+                
                 #when time is 10 seconds, goes to level 2
                 if(TheTime == 10):
+                        if (level2condition == 0):
+                                userspeed += 1
+                                level2condition = 1
                         Level = 2
                 elif(TheTime == 20):
+                        if (level3condition == 0):
+                                userspeed += 1
+                                level3condition = 1
                         Level = 3
+                elif(TheTime == 30):
+                        Level = 4
+                elif (TheTime == 40):
+                        if (level5condition == 0):
+                                fallingnum += 1
+                                RandomNums = []
+                                Rect = []
+                                userspeed += 1
+                                InitialRect(fallingnum,RandomNums,Rect,randomx)
+                                level5condition = 1
+                        Level = 5
                         
                         
                 #Level1
@@ -744,24 +836,40 @@ def main():
                         Level1WordRect = Level1Word.get_rect()
                         Level1WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level1Word,Level1WordRect)
-                        Level1((FPS - previousFPS))
-                        LevelItemsCheck()
+                        Level1((FPS - previousFPS),fallingnum,Rect)
+                        LevelItemsCheck(fallingnum,Rect,RandomNums)
                         
                 elif (Level == 2):
                         Level2Word = Font.render("Level 2",True,WHITE)
                         Level2WordRect = Level2Word.get_rect()
                         Level2WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level2Word,Level2WordRect)
-                        Level2((FPS - previousFPS))
-                        LevelItemsCheck()
+                        Level2((FPS - previousFPS),fallingnum,Rect,RandomSpeed)
+                        LevelItemsCheck(fallingnum,Rect,RandomNums)
                         
                 elif (Level == 3):
                         Level3Word = Font.render("Level 3",True,WHITE)
                         Level3WordRect = Level3Word.get_rect()
                         Level3WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level3Word,Level3WordRect)
-                        Level3((FPS - previousFPS))
-                        LevelItemsCheck()
+                        Level3((FPS - previousFPS),fallingnum,Rect)
+                        LevelItemsCheck(fallingnum,Rect,RandomNums)
+
+                elif (Level == 4):
+                        Level4Word = Font.render("Level 4",True,WHITE)
+                        Level4WordRect = Level4Word.get_rect()
+                        Level4WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                        Display.blit(Level4Word,Level3WordRect)
+                        Level4((FPS - previousFPS),fallingnum,Rect,RandomSpeed)
+                        LevelItemsCheck(fallingnum,Rect,RandomNums)
+
+                elif (Level == 5):
+                        Level5Word = Font.render("Level 5",True,WHITE)
+                        Level5WordRect = Level5Word.get_rect()
+                        Level5WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                        Display.blit(Level5Word,Level3WordRect)
+                        Level5((FPS - previousFPS),fallingnum,Rect)
+                        LevelItemsCheck(fallingnum,Rect,RandomNums)
                         
                 for event in pygame.event.get():
                         if event.type == QUIT:
@@ -881,29 +989,10 @@ def main():
                 #collision check
                 for collision in range(fallingnum):
                         if (userRect.colliderect(Rect[collision]) == True):
-                                Display.fill(BLACK)
-                                gameover = Font.render("GAME OVER!!!",True,WHITE)
-                                gameoverRect = gameover.get_rect()
-                                gameoverRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
-                                Display.blit(gameover,gameoverRect)
                                 running = False
 
                 pygame.display.update()
                 pygame.time.Clock().tick(30) #30fps
-
-        #wait 0 seconds
-        time.sleep(0)
-        #
-        #
-        #
-        #
-        #o for debugging
-        #
-        #
-        #
-        #
-        #
-        #
         
         #Game ending
         Ending = True
@@ -913,11 +1002,21 @@ def main():
         #Clear the game over screen
         Display.fill(BLACK)
 
+        gameover = Font.render("GAME OVER!!!",True,WHITE)
+        gameoverRect = gameover.get_rect()
+        gameoverRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2 - gameoverRect.height*2)
+        Display.blit(gameover,gameoverRect)
+
         #Please Enter your name
         EnterName = Font.render("Please Enter your name (Max 20 characters)",True,WHITE)
         EnterNameRect = EnterName.get_rect()
         EnterNameRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2 - EnterNameRect.height)
         Display.blit(EnterName,EnterNameRect)
+        
+        Exit = FontSmall.render("Press \'/\' to replay",True,WHITE)
+        ExitRect = Exit.get_rect()
+        ExitRect.center = (SCREEN_WIDTH - ExitRect.width/2 - 20,SCREEN_HEIGHT - ExitRect.height*2)
+        Display.blit(Exit,ExitRect)
 
         while Ending:
                 for event in pygame.event.get():
@@ -940,7 +1039,7 @@ def main():
                                                 del(RecordName[-1])
                                                 #print(RecordName)
                                                 Name = "".join(RecordName)
-                                                print(Name)
+                                                #print(Name)
                                                 pygame.draw.rect(Display,BLACK,TheNameRect)
                                                 TheName = Font.render(Name,True,GREY)
                                                 TheNameRect = TheName.get_rect()
@@ -948,11 +1047,12 @@ def main():
                                                 Display.blit(TheName,TheNameRect)
                                                 
                                         
-                                elif event.key == K_r:
-                                        print("R is pressed for replay, tempo setting")
+                                elif chr(event.key) == "/":
+                                        #print("/ is pressed for replay, tempo setting")
+                                        return main()
                                         
                                 elif event.key == K_RETURN:
-                                        print("enter")
+                                        #print("enter")
                                         if (RecordName != []):
                                                 File = open('Data.dat','a')
                                                 File.write(Name)
@@ -987,7 +1087,6 @@ def main():
                                 #print("MaxChar: ",MaxChar)
                                         
                 pygame.display.update()
-                pygame.time.Clock().tick(30) #30fps
                 
     
 main()
