@@ -4,7 +4,7 @@ import random
 import pygame,sys
 from pygame.locals import*
 
-SCREEN_WIDTH = 1000
+SCREEN_WIDTH = 960
 SCREEN_HEIGHT = 550
 IMAGE_WIDTH = 50
 IMAGE_HEIGHT = 50
@@ -57,45 +57,52 @@ backgroundRect.center = (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
 
 #sprites scale factor
 #big zombie = (IMAGE_WIDTH*2,IMAGE_HEIGHT*2)
-#masked orc = (IMAGE_WIDTH,IMAGE_HEIGHT+10)
-scale = (IMAGE_WIDTH*2,IMAGE_HEIGHT*2)
+#masked orc = (IMAGE_WIDTH+10,IMAGE_HEIGHT+15)
+scale = (IMAGE_WIDTH+10,IMAGE_HEIGHT+15)
+
 #idle
 #big zombie
-idle1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f0.png").convert_alpha()
-idle2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f1.png").convert_alpha()
-idle3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f2.png").convert_alpha()
-idle4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f3.png").convert_alpha()
+#idle1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f0.png").convert_alpha()
+#idle2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f1.png").convert_alpha()
+#idle3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f2.png").convert_alpha()
+#idle4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_idle_anim_f3.png").convert_alpha()
 #masked ogre
-#idle1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f0.png").convert_alpha()
-#idle2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f1.png").convert_alpha()
-#idle3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f2.png").convert_alpha()
-#idle4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f3.png").convert_alpha()
+idle1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f0.png").convert_alpha()
+idle2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f1.png").convert_alpha()
+idle3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f2.png").convert_alpha()
+idle4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_idle_anim_f3.png").convert_alpha()
 
 #runleft
 #big zombie
-runleft1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f0.png").convert_alpha()
-runleft2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f1.png").convert_alpha()
-runleft3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f2.png").convert_alpha()
-runleft4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f3.png").convert_alpha()
+#runleft1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f0.png").convert_alpha()
+#runleft2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f1.png").convert_alpha()
+#runleft3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f2.png").convert_alpha()
+#runleft4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_left_anim_f3.png").convert_alpha()
 #masked ogre
-#runleft1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f0.png").convert_alpha()
-#runleft2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f1.png").convert_alpha()
-#runleft3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f2.png").convert_alpha()
-#runleft4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f3.png").convert_alpha()
+runleft1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f0.png").convert_alpha()
+runleft2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f1.png").convert_alpha()
+runleft3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f2.png").convert_alpha()
+runleft4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_left_anim_f3.png").convert_alpha()
 
 
 #runright
 #big zombie
-runright1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f0.png").convert_alpha()
-runright2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f1.png").convert_alpha()
-runright3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f2.png").convert_alpha()
-runright4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f3.png").convert_alpha()
+#runright1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f0.png").convert_alpha()
+#runright2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f1.png").convert_alpha()
+#runright3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f2.png").convert_alpha()
+#runright4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/BigZombies/big_zombie_run_right_anim_f3.png").convert_alpha()
 #masked ogre
-#runright1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f0.png").convert_alpha()
-#runright2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f1.png").convert_alpha()
-#runright3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f2.png").convert_alpha()
-#runright4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f3.png").convert_alpha()
+runright1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f0.png").convert_alpha()
+runright2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f1.png").convert_alpha()
+runright3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f2.png").convert_alpha()
+runright4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/MaskedOrcs/masked_orc_run_right_anim_f3.png").convert_alpha()
 
+#chests
+chest1 = pygame.image.load("./Sprites/DungeonTilesII (Using)/Chests/chest_mimic_open_anim_f0.png").convert_alpha()
+chest2 = pygame.image.load("./Sprites/DungeonTilesII (Using)/Chests/chest_mimic_open_anim_f1.png").convert_alpha()
+chest3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/Chests/chest_mimic_open_anim_f2.png").convert_alpha()
+chest4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/Chests/chest_mimic_open_anim_f3.png").convert_alpha()
+chestscale =(IMAGE_WIDTH,IMAGE_HEIGHT)
 
 def Background():
         #Display.fill(BLACK)
@@ -121,23 +128,84 @@ def InitialRect():
 
                 Rect.append(pygame.Rect(randomx,0,IMAGE_WIDTH,IMAGE_HEIGHT))
 
-def Level1():
+def Level1(frame):
         #draw falling items
         for draw in range(fallingnum):
-                pygame.draw.rect(Display,WHITE,Rect[draw])
+                pygame.draw.rect(Display,WHITE,Rect[draw],3)
                 yspeed = 5
                 Rect[draw].y = Rect[draw].y + yspeed
-def Level2():
-    for num in range(fallingnum):
-        pygame.draw.rect(Display,WHITE,Rect[num])
-        yspeed = RandomSpeed[num]
-        Rect[num].y = Rect[num].y + yspeed
+                if (frame <= 3 or (frame > 12 and frame <= 15)):
+                        chest = pygame.transform.scale(chest1,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 6 or (frame > 15 and frame <= 18)):
+                        chest = pygame.transform.scale(chest2,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 9 or (frame > 18 and frame <= 21)):
+                        chest = pygame.transform.scale(chest3,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 12 or frame > 21):
+                        chest = pygame.transform.scale(chest4,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+def Level2(frame):
+        for num in range(fallingnum):
+                pygame.draw.rect(Display,WHITE,Rect[num],3)
+                yspeed = RandomSpeed[num]
+                Rect[num].y = Rect[num].y + yspeed
+        
+                if (frame <= 3 or (frame > 12 and frame <= 15)):
+                        chest = pygame.transform.scale(chest1,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 6 or (frame > 15 and frame <= 18)):
+                        chest = pygame.transform.scale(chest2,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 9 or (frame > 18 and frame <= 21)):
+                        chest = pygame.transform.scale(chest3,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 12 or frame > 21):
+                        chest = pygame.transform.scale(chest4,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[num].center
+                        Display.blit(chest,chestRect)
 
-def Level3():
+def Level3(frame):
         for draw in range(fallingnum):
-                pygame.draw.rect(Display,WHITE,Rect[draw])
+                pygame.draw.rect(Display,WHITE,Rect[draw],3)
                 yspeed = 5
-                Rect[draw].y = Rect[draw].y + yspeed + 5
+                Rect[draw].y = Rect[draw].y + yspeed + 3
+                if (frame <= 3 or (frame > 12 and frame <= 15)):
+                        chest = pygame.transform.scale(chest1,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 6 or (frame > 15 and frame <= 18)):
+                        chest = pygame.transform.scale(chest2,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 9 or (frame > 18 and frame <= 21)):
+                        chest = pygame.transform.scale(chest3,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
+                elif (frame <= 12 or frame > 21):
+                        chest = pygame.transform.scale(chest4,chestscale)
+                        chestRect = chest.get_rect()
+                        chestRect.center = Rect[draw].center
+                        Display.blit(chest,chestRect)
 
 def LevelItemsCheck():
     for num in range(fallingnum):
@@ -146,7 +214,7 @@ def LevelItemsCheck():
             RandomNums.remove(Rect[num].x + INTERVAL)
             RandomNums.remove(Rect[num].x - INTERVAL)
 
-            Rect[num].x = random.randrange(0,SCREEN_WIDTH -IMAGE_WIDTH,IMAGE_WIDTH)
+            Rect[num].x = random.randint(0,SCREEN_WIDTH - IMAGE_WIDTH)
         
             while True:
                 if (Rect[num].x % INTERVAL == 0 and Rect[num].x not in RandomNums):
@@ -193,9 +261,22 @@ def RecordScreen():
         #Display.blit(PlayerName,((SCREEN_WIDTH/2) - PlayerNameRect.width - TimeNameRect.width,(TimeNameRect.height)*1.5))
         
         #Read the data
-        File = open('Data.dat','r')
-        Read = File.read()
-
+        try:
+                File = open('Data.dat','r')
+                Read = File.read()
+                print(File)
+                #print("trying")
+        except:
+                File = open('Data.dat','w')
+                File.close()
+                File = open('Data.dat','r')
+                Read = File.read()
+                #print("catch some error")
+        else:
+                File = open('Data.dat','r')
+                Read = File.read()
+                #print("success")
+                
         #All the datas in Datas
         Datas = Read.splitlines()
         #print(Datas)
@@ -214,26 +295,47 @@ def RecordScreen():
         for i in range(SetOfData):
                 #print(Datas[i].split(','))
                 NewData.append((Datas[i].split(',')))
+        if (ScreenShowing > SetOfData):
+                for i in range (SetOfData):
+                        for j in range(3):
+                                if (j == 0):
+                                        TheName = Font.render(NewData[i][j],True,GREY)
+                                        TheNameRect = TheName.get_rect()
+                                        TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                        Display.blit(TheName,TheNameRect)
+                                        
+                                elif (j == 1):
+                                        TheTime = Font.render(NewData[i][j],True,GREY)
+                                        TheTimeRect = TheTime.get_rect()
+                                        TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                        Display.blit(TheTime,TheTimeRect)
 
-        for i in range(ScreenShowing):
-                for j in range(3):
-                        if (j == 0):
-                                TheName = Font.render(NewData[i][j],True,GREY)
-                                TheNameRect = TheName.get_rect()
-                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                Display.blit(TheName,TheNameRect)
-                                
-                        elif (j == 1):
-                                TheTime = Font.render(NewData[i][j],True,GREY)
-                                TheTimeRect = TheTime.get_rect()
-                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                Display.blit(TheTime,TheTimeRect)
+                                elif (j == 2):
+                                        TheLevel = Font.render(NewData[i][j],True,GREY)
+                                        TheLevelRect = TheLevel.get_rect()
+                                        TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                        Display.blit(TheLevel,TheLevelRect)
+                        
+        else:
+                for i in range(ScreenShowing):
+                        for j in range(3):
+                                if (j == 0):
+                                        TheName = Font.render(NewData[i][j],True,GREY)
+                                        TheNameRect = TheName.get_rect()
+                                        TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                        Display.blit(TheName,TheNameRect)
+                                        
+                                elif (j == 1):
+                                        TheTime = Font.render(NewData[i][j],True,GREY)
+                                        TheTimeRect = TheTime.get_rect()
+                                        TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                        Display.blit(TheTime,TheTimeRect)
 
-                        elif (j == 2):
-                                TheLevel = Font.render(NewData[i][j],True,GREY)
-                                TheLevelRect = TheLevel.get_rect()
-                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                Display.blit(TheLevel,TheLevelRect)
+                                elif (j == 2):
+                                        TheLevel = Font.render(NewData[i][j],True,GREY)
+                                        TheLevelRect = TheLevel.get_rect()
+                                        TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                        Display.blit(TheLevel,TheLevelRect)
 
         pygame.display.update()
 
@@ -262,27 +364,27 @@ def RecordScreen():
                                         Display.blit(TimeName,TimeNameRect)
                                         Display.blit(LevelName,LevelNameRect)
 
-                                        
-                                        for i in range(ScreenShowing):
-                                                for j in range(3):
-                                                        if (j == 0):
-                                                                TheName = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheName,TheNameRect)
-                                                                
-                                                        elif (j == 1):
-                                                                TheTime = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheTime,TheTimeRect)
+                                        if (ScreenShowing < SetOfData):
+                                                for i in range(ScreenShowing):
+                                                        for j in range(3):
+                                                                if (j == 0):
+                                                                        TheName = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheNameRect = TheName.get_rect()
+                                                                        TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheName,TheNameRect)
+                                                                        
+                                                                elif (j == 1):
+                                                                        TheTime = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheTimeRect = TheTime.get_rect()
+                                                                        TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheTime,TheTimeRect)
 
-                                                        elif (j == 2):
-                                                                TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheLevel,TheLevelRect)
-                                        pygame.display.update()
+                                                                elif (j == 2):
+                                                                        TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheLevelRect = TheLevel.get_rect()
+                                                                        TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheLevel,TheLevelRect)
+                                                pygame.display.update()
 
                                 #scrolldown
                                 elif (event.button == 5):
@@ -298,27 +400,28 @@ def RecordScreen():
                                         Display.blit(PlayerName,PlayerNameRect)
                                         Display.blit(TimeName,TimeNameRect)
                                         Display.blit(LevelName,LevelNameRect)
-                                        
-                                        for i in range(ScreenShowing):
-                                                for j in range(3):
-                                                        if (j == 0):
-                                                                TheName = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheName,TheNameRect)
-                                                                
-                                                        elif (j == 1):
-                                                                TheTime = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheTime,TheTimeRect)
 
-                                                        elif (j == 2):
-                                                                TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheLevel,TheLevelRect)
-                                        pygame.display.update()
+                                        if (ScreenShowing < SetOfData):
+                                                for i in range(ScreenShowing):
+                                                        for j in range(3):
+                                                                if (j == 0):
+                                                                        TheName = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheNameRect = TheName.get_rect()
+                                                                        TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheName,TheNameRect)
+                                                                        
+                                                                elif (j == 1):
+                                                                        TheTime = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheTimeRect = TheTime.get_rect()
+                                                                        TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheTime,TheTimeRect)
+
+                                                                elif (j == 2):
+                                                                        TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheLevelRect = TheLevel.get_rect()
+                                                                        TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheLevel,TheLevelRect)
+                                                pygame.display.update()
                                 
                                 
                         elif event.type == KEYDOWN:
@@ -336,27 +439,27 @@ def RecordScreen():
                                         Display.blit(TimeName,TimeNameRect)
                                         Display.blit(LevelName,LevelNameRect)
 
-                                        
-                                        for i in range(ScreenShowing):
-                                                for j in range(3):
-                                                        if (j == 0):
-                                                                TheName = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheName,TheNameRect)
-                                                                
-                                                        elif (j == 1):
-                                                                TheTime = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheTime,TheTimeRect)
+                                        if (ScreenShowing < SetOfData):
+                                                for i in range(ScreenShowing):
+                                                        for j in range(3):
+                                                                if (j == 0):
+                                                                        TheName = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheNameRect = TheName.get_rect()
+                                                                        TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheName,TheNameRect)
+                                                                        
+                                                                elif (j == 1):
+                                                                        TheTime = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheTimeRect = TheTime.get_rect()
+                                                                        TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheTime,TheTimeRect)
 
-                                                        elif (j == 2):
-                                                                TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheLevel,TheLevelRect)
-                                        pygame.display.update()
+                                                                elif (j == 2):
+                                                                        TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheLevelRect = TheLevel.get_rect()
+                                                                        TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheLevel,TheLevelRect)
+                                                pygame.display.update()
 
                                 elif (event.key == K_s or event.key == K_DOWN):
                                         #print("down")
@@ -371,27 +474,28 @@ def RecordScreen():
                                         Display.blit(PlayerName,PlayerNameRect)
                                         Display.blit(TimeName,TimeNameRect)
                                         Display.blit(LevelName,LevelNameRect)
-                                        
-                                        for i in range(ScreenShowing):
-                                                for j in range(3):
-                                                        if (j == 0):
-                                                                TheName = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheNameRect = TheName.get_rect()
-                                                                TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheName,TheNameRect)
-                                                                
-                                                        elif (j == 1):
-                                                                TheTime = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheTimeRect = TheTime.get_rect()
-                                                                TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheTime,TheTimeRect)
 
-                                                        elif (j == 2):
-                                                                TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
-                                                                TheLevelRect = TheLevel.get_rect()
-                                                                TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
-                                                                Display.blit(TheLevel,TheLevelRect)
-                                        pygame.display.update()
+                                        if (ScreenShowing < SetOfData):
+                                                for i in range(ScreenShowing):
+                                                        for j in range(3):
+                                                                if (j == 0):
+                                                                        TheName = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheNameRect = TheName.get_rect()
+                                                                        TheNameRect.center = (PlayerNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheName,TheNameRect)
+                                                                        
+                                                                elif (j == 1):
+                                                                        TheTime = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheTimeRect = TheTime.get_rect()
+                                                                        TheTimeRect.center = (TimeNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheTime,TheTimeRect)
+
+                                                                elif (j == 2):
+                                                                        TheLevel = Font.render(NewData[i+NextData][j],True,GREY)
+                                                                        TheLevelRect = TheLevel.get_rect()
+                                                                        TheLevelRect.center = (LevelNameRect.center[0],(PlayerNameRect.height*2) + ((i+1)*PlayerNameRect.height))
+                                                                        Display.blit(TheLevel,TheLevelRect)
+                                                pygame.display.update()
                                         
                                 elif (event.key == K_BACKSPACE):
                                         #print("backspace is pressed")
@@ -640,7 +744,7 @@ def main():
                         Level1WordRect = Level1Word.get_rect()
                         Level1WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level1Word,Level1WordRect)
-                        Level1()
+                        Level1((FPS - previousFPS))
                         LevelItemsCheck()
                         
                 elif (Level == 2):
@@ -648,7 +752,7 @@ def main():
                         Level2WordRect = Level2Word.get_rect()
                         Level2WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level2Word,Level2WordRect)
-                        Level2()
+                        Level2((FPS - previousFPS))
                         LevelItemsCheck()
                         
                 elif (Level == 3):
@@ -656,7 +760,7 @@ def main():
                         Level3WordRect = Level3Word.get_rect()
                         Level3WordRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
                         Display.blit(Level3Word,Level3WordRect)
-                        Level3()
+                        Level3((FPS - previousFPS))
                         LevelItemsCheck()
                         
                 for event in pygame.event.get():
@@ -844,8 +948,25 @@ def main():
                                                 Display.blit(TheName,TheNameRect)
                                                 
                                         
+                                elif event.key == K_r:
+                                        print("R is pressed for replay, tempo setting")
+                                        
                                 elif event.key == K_RETURN:
                                         print("enter")
+                                        if (RecordName != []):
+                                                File = open('Data.dat','a')
+                                                File.write(Name)
+                                                File.write(",")
+                                                File.write(str(TheTime))
+                                                File.write(",")
+                                                File.write(str(Level))
+                                                File.write("\n")
+                                                File.close()
+                                                pygame.quit()
+                                                sys.exit()
+                                        else:
+                                                pygame.quit()
+                                                sys.exit()
                                         
                                 elif re.search("[a-z]",chr(event.key)) or (chr(event.key) in ['1','2','3','4','5','6','7','8','9','0']) or event.key == K_SPACE:
                                         MaxChar += 1
@@ -862,11 +983,9 @@ def main():
                                                 Display.blit(TheName,TheNameRect)
                                         else:
                                                 MaxChar = 20
-                                        
-                                        
-                                
-                                #print("MaxChar: ",MaxChar)
                                                 
+                                #print("MaxChar: ",MaxChar)
+                                        
                 pygame.display.update()
                 pygame.time.Clock().tick(30) #30fps
                 
