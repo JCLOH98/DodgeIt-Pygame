@@ -87,6 +87,9 @@ chest3 = pygame.image.load("./Sprites/DungeonTilesII (Using)/Chests/chest_mimic_
 chest4 = pygame.image.load("./Sprites/DungeonTilesII (Using)/Chests/chest_mimic_open_anim_f3.png").convert_alpha()
 chestscale =(IMAGE_WIDTH,IMAGE_HEIGHT)
 
+#logo
+pygame.display.set_icon(pygame.transform.scale(pygame.image.load("./Sprites/Logo.png"),(32,32)))
+
 def Background():
         #Display.fill(BLACK)
         Display.blit(background,backgroundRect)
@@ -1027,6 +1030,7 @@ def main():
 
                         elif event.type == pygame.KEYDOWN:
                                 #print("Entering name")
+                                #print("event ket: ",event.key)
                                 if event.key == K_BACKSPACE:
                                         #print("backspace")
                                         #print(RecordName)
@@ -1048,9 +1052,7 @@ def main():
                                                 Display.blit(TheName,TheNameRect)
                                                 
                                         
-                                elif chr(event.key) == "/":
-                                        #print("/ is pressed for replay, tempo setting")
-                                        return main()
+                                
                                         
                                 elif event.key == K_RETURN:
                                         #print("enter")
@@ -1069,23 +1071,27 @@ def main():
                                                 pygame.quit()
                                                 sys.exit()
                                         
-                                elif re.search("[a-z]",chr(event.key)) or (chr(event.key) in ['1','2','3','4','5','6','7','8','9','0']) or event.key == K_SPACE:
-                                        MaxChar += 1
+                                elif event.key in range(256):
+                                        if re.search("[a-z]",chr(event.key)) or (chr(event.key) in ['1','2','3','4','5','6','7','8','9','0']) or event.key == K_SPACE:
+                                                MaxChar += 1
 
-                                        if MaxChar <= 20:
-                                                RecordName.append(chr(event.key))
-                                                #print("RecordName")
-                                                Name = "".join(RecordName)
-                                                #print(Name)
-                                                TheName = Font.render(Name,True,GREY)
-                                                TheNameRect = TheName.get_rect()
-                                                TheNameRect.center = (EnterNameRect.center[0], EnterNameRect.center[1] + TheNameRect.height)
-                                                pygame.draw.rect(Display,BLACK,TheNameRect)
-                                                Display.blit(TheName,TheNameRect)
-                                        else:
-                                                MaxChar = 20
-                                                
-                                #print("MaxChar: ",MaxChar)
+                                                if MaxChar <= 20:
+                                                        RecordName.append(chr(event.key))
+                                                        #print("RecordName")
+                                                        Name = "".join(RecordName)
+                                                        #print(Name)
+                                                        TheName = Font.render(Name,True,GREY)
+                                                        TheNameRect = TheName.get_rect()
+                                                        TheNameRect.center = (EnterNameRect.center[0], EnterNameRect.center[1] + TheNameRect.height)
+                                                        pygame.draw.rect(Display,BLACK,TheNameRect)
+                                                        Display.blit(TheName,TheNameRect)
+                                                else:
+                                                        MaxChar = 20
+
+                                        elif chr(event.key) == "/":
+                                                #print("/ is pressed for replay, tempo setting")
+                                                return main()
+                                        
                                         
                 pygame.display.update()
                 
