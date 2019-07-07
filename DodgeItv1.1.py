@@ -1076,7 +1076,7 @@ def main():
                                                 RecordName.append(chr(event.key))
                                                 #print("RecordName")
                                                 Name = "".join(RecordName)
-                                                print(Name)
+                                                #print(Name)
                                                 TheName = Font.render(Name,True,GREY)
                                                 TheNameRect = TheName.get_rect()
                                                 TheNameRect.center = (EnterNameRect.center[0], EnterNameRect.center[1] + TheNameRect.height)
