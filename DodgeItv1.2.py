@@ -27,7 +27,7 @@ INTERVAL = 50
 pygame.init()
 Display = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
-pygame.display.set_caption("Dodge It.v1.1")
+pygame.display.set_caption("Dodge It.v1.2")
 Font = pygame.font.Font('Fonts/victorycomics.ttf',32)
 FontSmall = pygame.font.Font('Fonts/victorycomics.ttf',15) 
 
@@ -307,7 +307,7 @@ def RecordScreen():
         try:
                 File = open('Data.dat','r')
                 Read = File.read()
-                print(File)
+                #print(File)
                 #print("trying")
         except:
                 File = open('Data.dat','w')
@@ -559,7 +559,7 @@ def RecordScreen():
 def StartScreen():
         Display.fill(BLACK)
 
-        Title = Font.render("Dodge it_v1.1",True,WHITE)
+        Title = Font.render("Dodge it_v1.2",True,WHITE)
         TitleRect = Title.get_rect()
         TitleRect.center = (SCREEN_WIDTH/2,SCREEN_HEIGHT/4)
 
@@ -775,8 +775,8 @@ def main():
                         TheTime = TheTime + 1
                         Start = time.time()
                         #To check the FPS
-                        print("Avg FPS: ", FPS/TheTime)
-                        print("RealTimeFPS:", (FPS - previousFPS)/(TheTime - FPScal),"\n")
+                        #print("Avg FPS: ", FPS/TheTime)
+                        #print("RealTimeFPS:", (FPS - previousFPS)/(TheTime - FPScal),"\n")
                         previousFPS = FPS
                         FPScal += 1
                         
@@ -1076,7 +1076,7 @@ def main():
                                                 RecordName.append(chr(event.key))
                                                 #print("RecordName")
                                                 Name = "".join(RecordName)
-                                                print(Name)
+                                                #print(Name)
                                                 TheName = Font.render(Name,True,GREY)
                                                 TheNameRect = TheName.get_rect()
                                                 TheNameRect.center = (EnterNameRect.center[0], EnterNameRect.center[1] + TheNameRect.height)
