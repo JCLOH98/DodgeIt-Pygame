@@ -9,3 +9,6 @@ Dodge it is a game that player need to dodge the falling obstacles. There is 5 l
 
 ## Demo
 The demo video is [here](https://www.youtube.com/watch?v=zrLU1OFmUmI)
+
+## Executable
+The .exe file can be found [here](https://jcloh98.itch.io/dodge-it)
